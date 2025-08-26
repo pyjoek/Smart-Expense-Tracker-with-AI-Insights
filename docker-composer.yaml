@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: expense_tracker
+      MYSQL_USER: trackeruser
+      MYSQL_PASSWORD: trackpass
+    ports: 
+     - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  api:
+    build: ./backend
+    restart: always
+    volumes:
+      - ./backend/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: mysql+pymysql://trackeruser:trackerpass@db/expense_tracker
+
+  volumes:
+    db_data:
