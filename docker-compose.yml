@@ -4,19 +4,19 @@ services:
   db:
     image: mysql:8.0
     restart: always
+    container_name: smart-expense-db
     environment:
       MYSQL_ROOT_PASSWORD: RootPass123
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: expense_tracker
-      MYSQL_USER: trackeruser
-      MYSQL_PASSWORD: trackpass
     ports: 
      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
   api:
     build: ./backend
+    container_name: smart-expense-api
     restart: always
     volumes:
       - ./backend:/app
@@ -27,7 +27,11 @@ services:
       - db
     environment:
       FLASK_ENV: development
-      DATABASE_URL: mysql+pymysql://trackeruser:trackerpass@db/expense_tracker
+      DATABASE_URL: mysql+pymysql://trackeruser:trackpass@db/expense_tracker
+      DB_USER: trackeruser
+      DB_PASSWORD: trackpass
+      DB_HOST: db
+      DB_NAME: expense_tracker
 
 volumes:
   db_data:
