@@ -43,11 +43,17 @@ target_db = current_app.extensions['migrate'].db
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+# Import your models so Alembic sees them
+from app import model   # ensures User class is loaded
+
+# Configure the database URL and metadata
+config.set_main_option('sqlalchemy.url', get_engine_url())
+target_db = current_app.extensions['migrate'].db
+target_metadata = target_db.metadata  # 👈 Alembic uses this
+
 
 
 def get_metadata():
-    if hasattr(target_db, 'metadatas'):
-        return target_db.metadatas[None]
     return target_db.metadata
 
 

@@ -22,6 +22,9 @@ def create_app():
     from app.routers.auth import auth_bp
     app.register_blueprint(auth_bp, url_prefix = "/auth")
 
+    from app import model  # import your User model
+
+
     @app.route("/")
     def index():
         return {"message": "Smart Expense Tracker API is running!"}
