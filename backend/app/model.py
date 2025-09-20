@@ -1,5 +1,6 @@
 from datetime import datetime
 from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
     __tablename__ = "users"
@@ -8,6 +9,14 @@ class User(db.Model):
     email = db.Column(db.String(120), unique = True, nullable = False)
     password = db.Column(db.String(200), nullable = False)
     created_at = db.Column(db.DateTime, default = datetime.utcnow)
+
+    def set_password(self, password):
+        """Hash and store the password"""
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        """check hash password"""
+        return check_password_hash(self.password, password)
 
 class Category(db.Model):
     __tablename__ = "categories"
