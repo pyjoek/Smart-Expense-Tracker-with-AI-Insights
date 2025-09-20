@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthService {
-  final String baseUrl = "http://10.0.2.2:5000"; // use 10.0.2.2 for Android emulator
+  final String baseUrl = "http://127.0.0.1:5000"; // use 10.0.2.2 for Android emulator
   final storage = const FlutterSecureStorage();
 
   Future<bool> register(String username, String email, String password) async {
@@ -17,7 +17,13 @@ class AuthService {
       }),
     );
 
-    return response.statusCode == 200;
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return true;
+    } else {
+      print("❌ Registration failed: ${response.body}");
+      return false;
+    }
+
   }
 
   Future<bool> login(String email, String password) async {
@@ -25,7 +31,7 @@ class AuthService {
       Uri.parse("$baseUrl/auth/login"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({
-        "username": email, // our API uses username/email field
+        "email": email, // our API uses username/email field
         "password": password,
       }),
     );
