@@ -31,26 +31,74 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(title: const Text("Login")),
+  //     body: Padding(
+  //       padding: const EdgeInsets.all(16),
+  //       child: Column(
+  //         children: [
+  //           TextField(controller: emailController, decoration: const InputDecoration(labelText: "Email")),
+  //           TextField(controller: passwordController, decoration: const InputDecoration(labelText: "Password"), obscureText: true),
+  //           const SizedBox(height: 20),
+  //           if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+  //           ElevatedButton(
+  //             onPressed: isLoading ? null : handleLogin,
+  //             child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
+  //           ),
+  //           TextButton(
+  //             onPressed: () => Navigator.pushNamed(context, "/register"),
+  //             child: const Text("No account? Register"),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Stack(
           children: [
-            TextField(controller: emailController, decoration: const InputDecoration(labelText: "Email")),
-            TextField(controller: passwordController, decoration: const InputDecoration(labelText: "Password"), obscureText: true),
-            const SizedBox(height: 20),
-            if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-            ElevatedButton(
-              onPressed: isLoading ? null : handleLogin,
-              child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pushNamed(context, "/register"),
-              child: const Text("No account? Register"),
-            ),
+            Positioned(
+              top: 12,
+              left: 120,
+              child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [BoxShadow(
+                    spreadRadius: 0,
+                    blurRadius: 12,
+                    color: Colors.black,
+
+                  )]
+                ),
+              )
+              ),Positioned(
+              top: 12,
+              left: 100,
+              child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [BoxShadow(
+                    spreadRadius: 0,
+                    blurRadius: 12,
+                    color: Colors.black,
+
+                  )]
+                ),
+              )
+              )
           ],
         ),
       ),
