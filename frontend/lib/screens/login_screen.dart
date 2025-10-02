@@ -9,6 +9,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  double? height;
+  double? width;
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final AuthService _authService = AuthService();
@@ -59,46 +62,55 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.white,
         body: Stack(
           children: [
             Positioned(
-              top: 12,
-              left: 120,
+              top: height! * 0.0001,
               child: Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(25),
-                  boxShadow: [BoxShadow(
-                    spreadRadius: 0,
-                    blurRadius: 12,
-                    color: Colors.black,
-
-                  )]
-                ),
+                width: width! * 1,
+                height: height!  * 0.8,
+                child: Image(image: AssetImage('assets/bgExpense.png')),
               )
-              ),Positioned(
-              top: 12,
-              left: 100,
+            ),
+            Positioned(
+              top: height! * 0.46,
+              left: width! * 0.1,
               child: Container(
-                width: 100,
-                height: 100,
+                width: width! * 0.8,
+                height: height! * 0.5,
+                child: Column(
+                  children: [
+                    TextField(controller: emailController, decoration: const InputDecoration(labelText: "Email")),
+            TextField(controller: passwordController, decoration: const InputDecoration(labelText: "Password"), obscureText: true),
+            const SizedBox(height: 20),
+            if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+            ElevatedButton(
+              onPressed: isLoading ? null : handleLogin,
+              child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, "/register"),
+              child: const Text("No account? Register"),
+            ),
+                  ],
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
                   boxShadow: [BoxShadow(
-                    spreadRadius: 0,
-                    blurRadius: 12,
-                    color: Colors.black,
-
+                    blurRadius: 20,
+                    color: Colors.black
                   )]
                 ),
               )
-              )
+            )
           ],
         ),
       ),
