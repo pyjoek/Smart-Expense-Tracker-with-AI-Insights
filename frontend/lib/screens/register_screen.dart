@@ -9,6 +9,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  double? width;
+  double? height;
+
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -34,40 +37,114 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(title: const Text("Register")),
+  //     body: Padding(
+  //       padding: const EdgeInsets.all(16),
+  //       child: Column(
+  //         children: [
+  //           TextField(
+  //             controller: usernameController,
+  //             decoration: const InputDecoration(labelText: "Username"),
+  //           ),
+  //           TextField(
+  //             controller: emailController,
+  //             decoration: const InputDecoration(labelText: "Email"),
+  //           ),
+  //           TextField(
+  //             controller: passwordController,
+  //             decoration: const InputDecoration(labelText: "Password"),
+  //             obscureText: true,
+  //           ),
+  //           const SizedBox(height: 20),
+  //           if (errorMessage != null)
+  //             Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+  //           ElevatedButton(
+  //             onPressed: isLoading ? null : handleRegister,
+  //             child: isLoading
+  //                 ? const CircularProgressIndicator()
+  //                 : const Text("Register"),
+  //           ),
+  //           TextButton(
+  //             onPressed: () => Navigator.pushReplacementNamed(context, "/login"),
+  //             child: const Text("Already have an account? Login"),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Register")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        body: Stack(
           children: [
-            TextField(
-              controller: usernameController,
-              decoration: const InputDecoration(labelText: "Username"),
+            Positioned(
+              top: height! * 0.0001,
+              child: Container(
+                width: width! * 1,
+                height: height!  * 0.8,
+                child: Image(image: AssetImage('assets/bgExpense.png')),
+              )
             ),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: "Email"),
-            ),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(labelText: "Password"),
-              obscureText: true,
-            ),
-            const SizedBox(height: 20),
-            if (errorMessage != null)
-              Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-            ElevatedButton(
-              onPressed: isLoading ? null : handleRegister,
-              child: isLoading
-                  ? const CircularProgressIndicator()
-                  : const Text("Register"),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, "/login"),
-              child: const Text("Already have an account? Login"),
-            ),
+            Positioned(
+              top: height! * 0.6,
+              left: width! * 0.1,
+              child: Container(
+                width: width! * 0.8,
+                height: height! * 0.35,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [BoxShadow(
+                    blurRadius: 20,
+                    color: Colors.black
+                  )]
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                       TextField(
+                        controller: usernameController,
+                        decoration: const InputDecoration(labelText: "Username"),
+                      ),
+                      TextField(
+                        controller: emailController,
+                        decoration: const InputDecoration(labelText: "Email"),
+                      ),
+                      TextField(
+                        controller: passwordController,
+                        decoration: const InputDecoration(labelText: "Password"),
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 20),
+                      if (errorMessage != null)
+                        Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+                      ElevatedButton(
+                        onPressed: isLoading ? null : handleRegister,
+                        child: isLoading
+                            ? const CircularProgressIndicator()
+                            : const Text("Register"),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pushReplacementNamed(context, "/login"),
+                        child: const Text("Already have an account? Login"),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            )
           ],
         ),
       ),

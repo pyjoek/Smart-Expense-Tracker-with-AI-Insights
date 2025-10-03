@@ -54,11 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
               )
             ),
             Positioned(
-              top: height! * 0.46,
+              top: height! * 0.65,
               left: width! * 0.1,
               child: Container(
                 width: width! * 0.8,
-                height: height! * 0.5,
+                height: height! * 0.3,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
@@ -67,21 +67,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black
                   )]
                 ),
-                child: Column(
-                  children: [
-                    TextField(controller: emailController, decoration: const InputDecoration(labelText: "Email")),
-                    TextField(controller: passwordController, decoration: const InputDecoration(labelText: "Password"), obscureText: true),
-                    const SizedBox(height: 20),
-                    if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-                    ElevatedButton(
-                      onPressed: isLoading ? null : handleLogin,
-                      child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pushNamed(context, "/register"),
-                      child: const Text("No account? Register"),
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: emailController, 
+                        decoration: const InputDecoration(
+                          labelText: "Email",
+                          )
+                        ),
+                      TextField(
+                        controller: passwordController, 
+                        decoration: const InputDecoration(
+                          labelText: "Password"
+                          ), 
+                        obscureText: true
+                      ),
+                      const SizedBox(height: 20),
+                      if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+                      ElevatedButton(
+                        onPressed: isLoading ? null : handleLogin,
+                        child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(context, "/register"),
+                        child: const Text("No account? Register"),
+                      ),
+                    ],
+                  ),
                 ),
               )
             )
