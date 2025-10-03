@@ -34,32 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(title: const Text("Login")),
-  //     body: Padding(
-  //       padding: const EdgeInsets.all(16),
-  //       child: Column(
-  //         children: [
-  //           TextField(controller: emailController, decoration: const InputDecoration(labelText: "Email")),
-  //           TextField(controller: passwordController, decoration: const InputDecoration(labelText: "Password"), obscureText: true),
-  //           const SizedBox(height: 20),
-  //           if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-  //           ElevatedButton(
-  //             onPressed: isLoading ? null : handleLogin,
-  //             child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
-  //           ),
-  //           TextButton(
-  //             onPressed: () => Navigator.pushNamed(context, "/register"),
-  //             child: const Text("No account? Register"),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -85,22 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
                 width: width! * 0.8,
                 height: height! * 0.5,
-                child: Column(
-                  children: [
-                    TextField(controller: emailController, decoration: const InputDecoration(labelText: "Email")),
-            TextField(controller: passwordController, decoration: const InputDecoration(labelText: "Password"), obscureText: true),
-            const SizedBox(height: 20),
-            if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-            ElevatedButton(
-              onPressed: isLoading ? null : handleLogin,
-              child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pushNamed(context, "/register"),
-              child: const Text("No account? Register"),
-            ),
-                  ],
-                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
@@ -108,6 +66,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     blurRadius: 20,
                     color: Colors.black
                   )]
+                ),
+                child: Column(
+                  children: [
+                    TextField(controller: emailController, decoration: const InputDecoration(labelText: "Email")),
+                    TextField(controller: passwordController, decoration: const InputDecoration(labelText: "Password"), obscureText: true),
+                    const SizedBox(height: 20),
+                    if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+                    ElevatedButton(
+                      onPressed: isLoading ? null : handleLogin,
+                      child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pushNamed(context, "/register"),
+                      child: const Text("No account? Register"),
+                    ),
+                  ],
                 ),
               )
             )
