@@ -37,46 +37,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(title: const Text("Register")),
-  //     body: Padding(
-  //       padding: const EdgeInsets.all(16),
-  //       child: Column(
-  //         children: [
-  //           TextField(
-  //             controller: usernameController,
-  //             decoration: const InputDecoration(labelText: "Username"),
-  //           ),
-  //           TextField(
-  //             controller: emailController,
-  //             decoration: const InputDecoration(labelText: "Email"),
-  //           ),
-  //           TextField(
-  //             controller: passwordController,
-  //             decoration: const InputDecoration(labelText: "Password"),
-  //             obscureText: true,
-  //           ),
-  //           const SizedBox(height: 20),
-  //           if (errorMessage != null)
-  //             Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-  //           ElevatedButton(
-  //             onPressed: isLoading ? null : handleRegister,
-  //             child: isLoading
-  //                 ? const CircularProgressIndicator()
-  //                 : const Text("Register"),
-  //           ),
-  //           TextButton(
-  //             onPressed: () => Navigator.pushReplacementNamed(context, "/login"),
-  //             child: const Text("Already have an account? Login"),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -90,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           children: [
             Positioned(
               top: height! * 0.0001,
-              child: Container(
+              child: SizedBox(
                 width: width! * 1,
                 height: height!  * 0.8,
                 child: Image(image: AssetImage('assets/bgExpense.png')),
