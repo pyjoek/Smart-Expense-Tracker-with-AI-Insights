@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
                   boxShadow: [BoxShadow(
-                    blurRadius: 20,
+                    blurRadius: 5,
                     color: Colors.black
                   )]
                 ),
@@ -74,21 +74,51 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextField(
                         controller: emailController, 
                         decoration: const InputDecoration(
-                          labelText: "Email",
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                            Icons.person
+                          ),
+                          hint: Text("Name")
                           )
                         ),
                       TextField(
                         controller: passwordController, 
                         decoration: const InputDecoration(
-                          labelText: "Password"
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                            Icons.lock
+                          ),
+                          hint: Text("Password")
                           ), 
                         obscureText: true
                       ),
                       const SizedBox(height: 20),
                       if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-                      ElevatedButton(
-                        onPressed: isLoading ? null : handleLogin,
-                        child: isLoading ? const CircularProgressIndicator() : const Text("Login"),
+                      // ElevatedButton(
+                      //   onPressed: isLoading ? null : handleLogin,
+                      //   child: isLoading ? 
+                      //   const CircularProgressIndicator() : 
+                      //   const Text("Login"),
+                      // ),
+                      Center(
+                        child: InkWell(
+                          onTap: isLoading ? null : handleLogin,
+                          child: Container(
+                            height: height! * 0.05,
+                            width: width! * 0.3,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Colors.yellow[800]
+                            ),
+                            child: Center(
+                              child: Text("Login",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20
+                              ),),
+                            )
+                          ),
+                        ),
                       ),
                       TextButton(
                         onPressed: () => Navigator.pushNamed(context, "/register"),
